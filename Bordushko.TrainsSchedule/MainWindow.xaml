@@ -1,0 +1,124 @@
+﻿<Window x:Class="Bordushko.TrainsSchedule.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Bordushko.TrainsSchedule"
+        xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
+        x:Name="mainWindow"
+        Title="Main Window"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources />
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Command="ApplicationCommands.New" Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+                <MenuItem Command="Open" Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+                <MenuItem Command="Save" Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+                <MenuItem Command="SaveAs" Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+                <Separator />
+                <MenuItem Command="Close" Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+            </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Command="Help" Header="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+                <Separator />
+                <MenuItem Header="О программе" />
+            </MenuItem>
+        </Menu>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0"
+                        Width="Auto"
+                        MaxWidth="100"
+                        Orientation="Vertical">
+                <Button Margin="0 0 0 5"
+                        Command="New"
+                        Content="{Binding RelativeSource={RelativeSource Self},
+                                          Path=Command.Text}" />
+                <Button Margin="0 0 0 5"
+                        Command="Open"
+                        Content="{Binding RelativeSource={RelativeSource Self},
+                                          Path=Command.Text}" />
+                <Button Margin="0 0 0 5"
+                        Command="Save"
+                        Content="{Binding RelativeSource={RelativeSource Self},
+                                          Path=Command.Text}" />
+                <Button Command="SaveAs" Content="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+                <Button Name="AddRecordButton" Click="addRecordButton_Click">
+                    <TextBlock TextWrapping="Wrap">Добавить запись</TextBlock>
+                </Button>
+            </StackPanel>
+            <DataGrid Name="DataTable"
+                      Grid.Column="1"
+                      HorizontalAlignment="Stretch"
+                      AutoGenerateColumns="False"
+                      ColumnWidth="Auto"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Number}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap">
+                                № поезда
+                            </TextBlock>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=DepartureStation}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap">
+                                Станция отправления
+                            </TextBlock>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=ArrivalStation}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap">
+                                Станция прибытия
+                            </TextBlock>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=DepartureTime}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap">
+                                Время отправления
+                            </TextBlock>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=ArrivalTime}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap">
+                                Время прибытия
+                            </TextBlock>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=TravelTime}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap">
+                                Время пути
+                            </TextBlock>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StatusBar Grid.Row="1" Grid.ColumnSpan="2" />
+        </Grid>
+    </DockPanel>
+</Window>

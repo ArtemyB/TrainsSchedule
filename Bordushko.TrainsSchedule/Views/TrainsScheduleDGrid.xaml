@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="Bordushko.TrainsSchedule.Views.TrainsScheduleDGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="600"
+             mc:Ignorable="d">
+    <UserControl.CommandBindings>
+        <CommandBinding CanExecute="FirstPage_OnCanExecute"
+                        Command="FirstPage"
+                        Executed="FirstPage_Executed" />
+        <CommandBinding Command="LastPage" Executed="LastPage_Executed" />
+        <CommandBinding Command="NextPage" Executed="NextPage_Executed" />
+        <CommandBinding Command="PreviousPage" Executed="PreviousPage_Executed" />
+        <CommandBinding Command="GoToPage" Executed="GoToPage_Executed" />
+    </UserControl.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DataGrid Name="ScheduleDataGrid"
+                  HorizontalAlignment="Stretch"
+                  ColumnWidth="Auto"
+                  IsReadOnly="True"
+                  IsSynchronizedWithCurrentItem="True"
+                  ItemsSource="{Binding Path=.}"
+                  Loaded="DataTable_OnLoaded"
+                  Sorting="DataTable_OnSorting"
+                  TargetUpdated="DataTable_OnTargetUpdated">
+            <DataGrid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                    <Setter Property="TextAlignment" Value="Center" />
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn>
+                    <DataGridTextColumn.Header>
+                        <TextBlock>№ поезда</TextBlock>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn>
+                    <DataGridTextColumn.Header>
+                        <TextBlock>Станция отправления</TextBlock>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn>
+                    <DataGridTextColumn.Header>
+                        <TextBlock>Станция прибытия</TextBlock>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn>
+                    <DataGridTextColumn.Header>
+                        <TextBlock>Время отправления</TextBlock>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn>
+                    <DataGridTextColumn.Header>
+                        <TextBlock>Время прибытия</TextBlock>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn>
+                    <DataGridTextColumn.Header>
+                        <TextBlock>Время пути</TextBlock>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5 2 5 2" />
+                    <Setter Property="Padding" Value="2" />
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="3" />
+                </Style>
+            </StackPanel.Resources>
+            <Button Command="FirstPage"
+                    Content="&lt;&lt;"
+                    ToolTip="{Binding RelativeSource={RelativeSource Self},
+                                      Path=Command.Text}" />
+            <Button Command="PreviousPage"
+                    Content="&lt;"
+                    ToolTip="{Binding RelativeSource={RelativeSource Self},
+                                      Path=Command.Text}" />
+            <TextBox Name="СurrentPageTBox" MinWidth="20">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Return" Command="GoToPage" />
+                </TextBox.InputBindings>
+            </TextBox>
+            <Label>of</Label>
+            <Label MinWidth="20" Content="{Binding}" />
+            <Button Command="PreviousPage"
+                    Content="&gt;"
+                    ToolTip="{Binding RelativeSource={RelativeSource Self},
+                                      Path=Command}" />
+            <Button Command="PreviousPage"
+                    Content="&gt;&gt;"
+                    ToolTip="{Binding RelativeSource={RelativeSource Self},
+                                      Path=Command}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

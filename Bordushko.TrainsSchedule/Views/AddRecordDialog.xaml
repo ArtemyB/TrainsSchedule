@@ -1,0 +1,93 @@
+﻿<Window x:Class="Bordushko.TrainsSchedule.Views.AddRecordDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="Создание новой записи"
+        SizeToContent="WidthAndHeight">
+    <Window.CommandBindings>
+        <CommandBinding Command="Close" Executed="Close_Executed" />
+        <CommandBinding CanExecute="Close_CanExecute"
+                        Command="New"
+                        Executed="NewRecord_Executed" />
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="StackPanel">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="Margin" Value="0 0 10 0" />
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Margin" Value="3" />
+            </Style>
+            <Style TargetType="xceed:DateTimePicker">
+                <Setter Property="Margin" Value="3" />
+            </Style>
+            <Style TargetType="xceed:TimeSpanUpDown">
+                <Setter Property="Margin" Value="3" />
+                <Setter Property="MinWidth" Value="200" />
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label>Номер поезда:</Label>
+        <TextBox Name="NumberField"
+                 Grid.Column="1"
+                 MinWidth="100"
+                 HorizontalAlignment="Left" />
+        <Label Grid.Row="1">Станция отправления:</Label>
+        <TextBox Name="DepStationField"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 MinWidth="150" />
+        <Label Grid.Row="1" Grid.Column="2">Станция прибытия:</Label>
+        <TextBox Name="ArrStationField"
+                 Grid.Row="1"
+                 Grid.Column="3"
+                 MinWidth="150" />
+        <Label Grid.Row="2">Время отправления:</Label>
+        <xceed:DateTimePicker Name="DepTimeField"
+                              Grid.Row="2"
+                              Grid.Column="1"
+                              MinWidth="150" />
+        <Label Grid.Row="2" Grid.Column="2">Время прибытия:</Label>
+        <xceed:DateTimePicker Name="ArrTimeField"
+                              Grid.Row="2"
+                              Grid.Column="3"
+                              MinWidth="150" />
+        <Label Grid.Row="3">Время пути:</Label>
+        <xceed:TimeSpanUpDown Name="TravelTimeField"
+                              Grid.Row="3"
+                              Grid.Column="1" />
+        <StackPanel Grid.Row="4"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Center">
+            <Button Name="CreateRecordButton"
+                    Margin="10"
+                    Command="New"
+                    Padding="3">
+                Создать
+            </Button>
+            <Button Margin="10"
+                    Command="Close"
+                    Padding="3">
+                Отмена
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
