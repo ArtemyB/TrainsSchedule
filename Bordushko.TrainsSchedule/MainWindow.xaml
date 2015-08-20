@@ -29,10 +29,6 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="20" />
-            </Grid.RowDefinitions>
             <StackPanel Grid.Column="0"
                         Width="Auto"
                         MaxWidth="100"
@@ -118,7 +114,6 @@
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <StatusBar Grid.Row="1" Grid.ColumnSpan="2" />
         </Grid>
     </DockPanel>
 </Window>

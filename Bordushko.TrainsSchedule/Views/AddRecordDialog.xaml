@@ -6,7 +6,7 @@
         SizeToContent="WidthAndHeight">
     <Window.CommandBindings>
         <CommandBinding Command="Close" Executed="Close_Executed" />
-        <CommandBinding CanExecute="Close_CanExecute"
+        <CommandBinding CanExecute="NewRecord_CanExecute"
                         Command="New"
                         Executed="NewRecord_Executed" />
     </Window.CommandBindings>
@@ -69,11 +69,12 @@
                               Grid.Row="2"
                               Grid.Column="3"
                               MinWidth="150" />
+        <!--
         <Label Grid.Row="3">Время пути:</Label>
         <xceed:TimeSpanUpDown Name="TravelTimeField"
                               Grid.Row="3"
-                              Grid.Column="1" />
-        <StackPanel Grid.Row="4"
+                              Grid.Column="1" />-->
+        <StackPanel Grid.Row="3"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
                     HorizontalAlignment="Center">

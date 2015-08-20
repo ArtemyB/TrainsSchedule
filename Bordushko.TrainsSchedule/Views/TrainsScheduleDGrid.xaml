@@ -26,10 +26,7 @@
                   ColumnWidth="Auto"
                   IsReadOnly="True"
                   IsSynchronizedWithCurrentItem="True"
-                  ItemsSource="{Binding Path=.}"
-                  Loaded="DataTable_OnLoaded"
-                  Sorting="DataTable_OnSorting"
-                  TargetUpdated="DataTable_OnTargetUpdated">
+                  ItemsSource="{Binding Path=.}">
             <DataGrid.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="HorizontalAlignment" Value="Center" />

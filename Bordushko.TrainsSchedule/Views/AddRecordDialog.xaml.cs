@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
+using Bordushko.TrainsSchedule.Controllers;
+using Bordushko.TrainsSchedule.Models;
 using Bordushko.TrainsSchedule.Utils;
 
 namespace Bordushko.TrainsSchedule.Views
@@ -9,36 +12,40 @@ namespace Bordushko.TrainsSchedule.Views
     /// </summary>
     public partial class AddRecordDialog : Window
     {
+        private readonly AddRecordController controller;
 
         public AddRecordDialog()
         {
             InitializeComponent();
+            controller = new AddRecordController(this);
         }
 
         private void Close_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            this.Close();
-        }
-
-        private void createRecord_Click(object sender, RoutedEventArgs e)
-        {
-            
+            Close();
         }
 
         private void NewRecord_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            controller.AddRecord(
+                new TrainInfo(NumberField.Text,
+                DepStationField.Text,
+                ArrStationField.Text,
+                DateTime.Parse(DepTimeField.Text),
+                DateTime.Parse(ArrTimeField.Text)));
         }
 
-        private void Close_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void NewRecord_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             if (CheckUp.IsAnyStringEmpty(NumberField.Text, DepStationField.Text,
-                                        ArrStationField.Text, DepTimeField.Text,
-                                        ArrTimeField.Text,TravelTimeField.Text))
+                                        ArrStationField.Text, DepTimeField.Text))
             {
                 e.CanExecute = false;
             }
-            e.CanExecute = true;
+            else
+            {
+                e.CanExecute = true; 
+            }
         }
     }
 }

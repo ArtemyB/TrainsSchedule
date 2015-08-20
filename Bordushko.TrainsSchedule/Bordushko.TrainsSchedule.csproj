@@ -85,6 +85,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\AddRecordController.cs" />
     <Compile Include="Controllers\SearchComponentController.cs" />
     <Compile Include="Utils\CheckUp.cs" />
     <Compile Include="Views\AddRecordDialog.xaml.cs">

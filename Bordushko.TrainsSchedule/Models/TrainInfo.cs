@@ -16,15 +16,13 @@ namespace Bordushko.TrainsSchedule.Models
             string departureStation,
             string arrivalStation,
             DateTime departureTime,
-            DateTime arrivalTime,
-            TimeSpan travelTime)
+            DateTime arrivalTime)
         {
             Number = number;
             DepartureStation = departureStation;
             ArrivalStation = arrivalStation;
             DepartureTime = departureTime;
             ArrivalTime = arrivalTime;
-            TravelTime = travelTime;
         }
 
         #endregion Constructors
@@ -47,7 +45,10 @@ namespace Bordushko.TrainsSchedule.Models
         public DateTime ArrivalTime { get; set; }
 
         [XmlAttribute]
-        public TimeSpan TravelTime { get; set; }
+        public TimeSpan TravelTime
+        {
+            get { return ArrivalTime - DepartureTime; }
+        }
 
         #endregion Properties
 
