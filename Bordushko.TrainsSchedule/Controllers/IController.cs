@@ -6,6 +6,5 @@ namespace Bordushko.TrainsSchedule.Controllers
     public interface IController
     {
         IView View { get; }
-        PagedCollectionView CollectionView { get; set; }
     }
 }

@@ -28,8 +28,7 @@ namespace Bordushko.TrainsSchedule.Views
         public SearchDialog()
         {
             InitializeComponent();
-            Controller = new SearchDialogController(this, 
-                (Application.Current as App).TrainInfoCollection);
+            Controller = new SearchDialogController(this);
             SearchFormModel model = new SearchFormModel();
             SearchingProps = model;
             DataContext = model;

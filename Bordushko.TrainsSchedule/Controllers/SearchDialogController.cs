@@ -8,15 +8,12 @@ namespace Bordushko.TrainsSchedule.Controllers
     public class SearchDialogController
     {
         public SearchDialog View { get; private set; }
-        public PagedCollectionView CollectionView { get; set; }
 
-        public SearchDialogController(SearchDialog view, TrainInfoCollection collection)
+        public SearchDialogController(SearchDialog view)
         {
             if (view == null) throw new ArgumentNullException("view");
-            if (collection == null) throw new ArgumentNullException("collection");
 
             View = view;
-            CollectionView = new PagedCollectionView(collection);
         }
 
         public void FilterByNumberAndDepTime()

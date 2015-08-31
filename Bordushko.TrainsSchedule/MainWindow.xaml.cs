@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Bordushko.TrainsSchedule.Views;
+using Microsoft.Win32;
 
 namespace Bordushko.TrainsSchedule
 {
@@ -36,6 +37,19 @@ namespace Bordushko.TrainsSchedule
         {
             SearchDialog dialog = new SearchDialog();
             dialog.ShowDialog();
+        }
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveDialog dialog = new RemoveDialog();
+            dialog.ShowDialog();
+        }
+
+        private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.ShowDialog();
+            (Application.Current as App).TrainInfoCollection.Save(dialog.FileName);
         }
     }
 }

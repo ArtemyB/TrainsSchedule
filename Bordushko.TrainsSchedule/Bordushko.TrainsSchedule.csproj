@@ -87,6 +87,7 @@
     </Compile>
     <Compile Include="Controllers\AddRecordController.cs" />
     <Compile Include="Controllers\IController.cs" />
+    <Compile Include="Controllers\RemoveDialogController.cs" />
     <Compile Include="Controllers\SearchFormController.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utils\CheckUp.cs" />
@@ -95,8 +96,8 @@
       <DependentUpon>AddRecordDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\IView.cs" />
-    <Compile Include="Views\RemoveWindow.xaml.cs">
-      <DependentUpon>RemoveWindow.xaml</DependentUpon>
+    <Compile Include="Views\RemoveDialog.xaml.cs">
+      <DependentUpon>RemoveDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchForm.xaml.cs">
       <DependentUpon>SearchForm.xaml</DependentUpon>
@@ -157,7 +158,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\RemoveWindow.xaml">
+    <Page Include="Views\RemoveDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

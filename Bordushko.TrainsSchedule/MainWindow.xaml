@@ -7,7 +7,9 @@
         Title="Main Window"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen">
-    <Window.Resources />
+    <Window.CommandBindings>
+        <CommandBinding Command="Save" Executed="Save_Executed" />
+    </Window.CommandBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -33,6 +35,11 @@
                         Width="Auto"
                         MaxWidth="100"
                         Orientation="Vertical">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="TextWrapping" Value="Wrap" />
+                    </Style>
+                </StackPanel.Resources>
                 <Button Margin="0 0 0 5"
                         Command="New"
                         Content="{Binding RelativeSource={RelativeSource Self},
@@ -47,9 +54,14 @@
                                           Path=Command.Text}" />
                 <Button Command="SaveAs" Content="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
                 <Button Name="AddRecordButton" Click="addRecordButton_Click">
-                    <TextBlock TextWrapping="Wrap">Добавить запись</TextBlock>
+                    <TextBlock>Добавить информацию</TextBlock>
                 </Button>
-                <Button Click="SearchButton_Click">Поиск поезда</Button>
+                <Button Click="RemoveButton_Click">
+                    <TextBlock>Удалить информацию</TextBlock>
+                </Button>
+                <Button Click="SearchButton_Click">
+                    <TextBlock>Поиск информации</TextBlock>
+                </Button>
             </StackPanel>
             <!--<DataGrid Name="DataTable"
                       Grid.Column="1"
