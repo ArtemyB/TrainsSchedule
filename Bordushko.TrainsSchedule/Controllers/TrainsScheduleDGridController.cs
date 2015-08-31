@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Security.Policy;
+using System.Windows;
 using System.Windows.Data;
 using Bordushko.TrainsSchedule.Models;
 using Bordushko.TrainsSchedule.Views;
@@ -20,37 +22,65 @@ namespace Bordushko.TrainsSchedule.Controllers
                 throw new ArgumentNullException("collection");
 
             this.view = view;
-            cView = new PagedCollectionView(collection);
+            cView = new PagedCollectionView(collection) {PageSize = 10};
+        }
+
+
+        //public int PagesCount
+        //{
+        //    get { return cView.Count / cView.PageSize; }
+        //}
+
+        //public void MoveToFirstPage()
+        //{
+        //    cView.MoveToFirstPage();
+        //}
+
+        //public void MoveToLasPage()
+        //{
+        //    cView.MoveToLastPage();
+        //}
+
+        //public void MoveToPreviousPage()
+        //{
+        //    cView.MoveToPreviousPage();
+        //}
+
+        //public void MoveToNextPage()
+        //{
+        //    cView.MoveToNextPage();
+        //}
+
+        //public void MoveToPage(int pageNumber)
+        //{
+        //    cView.MoveToPage(pageNumber);
+        //}
+
+        public PagedCollectionView CollectionView
+        {
+            get { return cView; }
         }
 
         public int PagesCount
         {
-            get { return cView.Count / cView.PageSize; }
+            get { return CollectionView.TotalItemCount / CollectionView.PageSize; }
         }
 
-        public void MoveToFirstPage()
+        public void GoToPage(string indexStr)
         {
-            cView.MoveToFirstPage();
+            int index = int.Parse(indexStr);
+            if (index >= 0 && index <= PagesCount)
+                CollectionView.MoveToPage(index); 
         }
 
-        public void MoveToLasPage()
+        public void Filter(Func<object, bool> filterFunc)
         {
-            cView.MoveToLastPage();
+            cView.Filter = new Predicate<object>(filterFunc);
         }
 
-        public void MoveToPreviousPage()
+        public void FilterReset()
         {
-            cView.MoveToPreviousPage();
-        }
-
-        public void MoveToNextPage()
-        {
-            cView.MoveToNextPage();
-        }
-
-        public void MoveToPage(int pageNumber)
-        {
-            cView.MoveToPage(pageNumber);
+            cView.Filter = null;
         }
     }
 }

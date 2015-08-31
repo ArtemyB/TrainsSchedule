@@ -22,6 +22,5 @@ namespace Bordushko.TrainsSchedule.Controllers
             trainsInfoWindow = window;
             trainsInfoView = new PagedCollectionView(trainsInfo);
         }
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Bordushko.TrainsSchedule.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:Bordushko.TrainsSchedule"
+        xmlns:views="clr-namespace:Bordushko.TrainsSchedule.Views"
         xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
         x:Name="mainWindow"
         Title="Main Window"
@@ -49,8 +49,9 @@
                 <Button Name="AddRecordButton" Click="addRecordButton_Click">
                     <TextBlock TextWrapping="Wrap">Добавить запись</TextBlock>
                 </Button>
+                <Button Click="SearchButton_Click">Поиск поезда</Button>
             </StackPanel>
-            <DataGrid Name="DataTable"
+            <!--<DataGrid Name="DataTable"
                       Grid.Column="1"
                       HorizontalAlignment="Stretch"
                       AutoGenerateColumns="False"
@@ -113,7 +114,8 @@
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                 </DataGrid.Columns>
-            </DataGrid>
+            </DataGrid>-->
+            <views:TrainsScheduleDGrid Grid.Column="1" />
         </Grid>
     </DockPanel>
 </Window>

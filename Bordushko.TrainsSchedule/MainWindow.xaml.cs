@@ -31,5 +31,11 @@ namespace Bordushko.TrainsSchedule
             AddRecordDialog dialog = new AddRecordDialog();
             dialog.ShowDialog();
         }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            SearchDialog dialog = new SearchDialog();
+            dialog.ShowDialog();
+        }
     }
 }

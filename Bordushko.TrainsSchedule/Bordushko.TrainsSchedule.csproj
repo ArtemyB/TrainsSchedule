@@ -86,16 +86,23 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\AddRecordController.cs" />
-    <Compile Include="Controllers\SearchComponentController.cs" />
+    <Compile Include="Controllers\IController.cs" />
+    <Compile Include="Controllers\SearchFormController.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utils\CheckUp.cs" />
+    <Compile Include="Utils\SearchFormModel.cs" />
     <Compile Include="Views\AddRecordDialog.xaml.cs">
       <DependentUpon>AddRecordDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\IView.cs" />
     <Compile Include="Views\RemoveWindow.xaml.cs">
       <DependentUpon>RemoveWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SearchComponent.xaml.cs">
-      <DependentUpon>SearchComponent.xaml</DependentUpon>
+    <Compile Include="Views\SearchForm.xaml.cs">
+      <DependentUpon>SearchForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchDialog.xaml.cs">
+      <DependentUpon>SearchDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrainsScheduleDGrid.xaml.cs">
       <DependentUpon>TrainsScheduleDGrid.xaml</DependentUpon>
@@ -154,7 +161,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\SearchComponent.xaml">
+    <Page Include="Views\SearchForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -33,6 +33,7 @@ namespace Bordushko.TrainsSchedule.Views
                 ArrStationField.Text,
                 DateTime.Parse(DepTimeField.Text),
                 DateTime.Parse(ArrTimeField.Text)));
+            Close();
         }
 
         private void NewRecord_CanExecute(object sender, CanExecuteRoutedEventArgs e)

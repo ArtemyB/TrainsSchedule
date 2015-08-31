@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Name="ThisUserControl"
+             Width="Auto"
+             Height="Auto"
              d:DesignHeight="300"
              d:DesignWidth="600"
              mc:Ignorable="d">
@@ -15,52 +18,53 @@
         <CommandBinding Command="PreviousPage" Executed="PreviousPage_Executed" />
         <CommandBinding Command="GoToPage" Executed="GoToPage_Executed" />
     </UserControl.CommandBindings>
-    <Grid>
+    <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <DataGrid Name="ScheduleDataGrid"
+                  MinHeight="200"
                   HorizontalAlignment="Stretch"
                   ColumnWidth="Auto"
                   IsReadOnly="True"
                   IsSynchronizedWithCurrentItem="True"
-                  ItemsSource="{Binding Path=.}">
+                  ItemsSource="{Binding}">
             <DataGrid.Resources>
-                <Style TargetType="TextBlock">
+                <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                     <Setter Property="HorizontalAlignment" Value="Center" />
                     <Setter Property="TextWrapping" Value="Wrap" />
                     <Setter Property="TextAlignment" Value="Center" />
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Number}">
                     <DataGridTextColumn.Header>
                         <TextBlock>№ поезда</TextBlock>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=DepartureStation}">
                     <DataGridTextColumn.Header>
                         <TextBlock>Станция отправления</TextBlock>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=ArrivalStation}">
                     <DataGridTextColumn.Header>
                         <TextBlock>Станция прибытия</TextBlock>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=DepartureTime}">
                     <DataGridTextColumn.Header>
                         <TextBlock>Время отправления</TextBlock>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=ArrivalTime}">
                     <DataGridTextColumn.Header>
                         <TextBlock>Время прибытия</TextBlock>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=TravelTime}">
                     <DataGridTextColumn.Header>
                         <TextBlock>Время пути</TextBlock>
                     </DataGridTextColumn.Header>
@@ -71,7 +75,7 @@
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
             <StackPanel.Resources>
-                <Style TargetType="Button">
+                <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
                     <Setter Property="Margin" Value="5 2 5 2" />
                     <Setter Property="Padding" Value="2" />
                 </Style>
@@ -87,21 +91,25 @@
                     Content="&lt;"
                     ToolTip="{Binding RelativeSource={RelativeSource Self},
                                       Path=Command.Text}" />
-            <TextBox Name="СurrentPageTBox" MinWidth="20">
+            <TextBox Name="СurrentPageTBox"
+                     MinWidth="20"
+                     PreviewTextInput="CurrentPageTextBoxInputValidation"
+                     Text="{Binding Mode=OneWay,
+                                    Path=PageIndex}">
                 <TextBox.InputBindings>
                     <KeyBinding Key="Return" Command="GoToPage" />
                 </TextBox.InputBindings>
             </TextBox>
-            <Label>of</Label>
-            <Label MinWidth="20" Content="{Binding}" />
-            <Button Command="PreviousPage"
+            <Label>из</Label>
+            <Label MinWidth="20" Content="{Binding ElementName=ThisUserControl, Path=Controller.PagesCount}" />
+            <Button Command="NextPage"
                     Content="&gt;"
                     ToolTip="{Binding RelativeSource={RelativeSource Self},
-                                      Path=Command}" />
-            <Button Command="PreviousPage"
+                                      Path=Command.Text}" />
+            <Button Command="LastPage"
                     Content="&gt;&gt;"
                     ToolTip="{Binding RelativeSource={RelativeSource Self},
-                                      Path=Command}" />
+                                      Path=Command.Text}" />
         </StackPanel>
     </Grid>
 </UserControl>
