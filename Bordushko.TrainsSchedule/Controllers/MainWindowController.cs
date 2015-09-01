@@ -3,24 +3,56 @@ using System.Net.Mime;
 using System.Windows;
 using System.Windows.Data;
 using Bordushko.TrainsSchedule.Models;
+using Microsoft.Win32;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Bordushko.TrainsSchedule.Controllers
 {
     public class MainWindowController
     {
-        private readonly PagedCollectionView trainsInfoView;
-        private readonly MainWindow trainsInfoWindow;
+        private string fileFilter = "Trains Schedule (.schd)|*.schd|XML file (.xml)|*.xml";
 
-        public MainWindowController(MainWindow window, TrainInfoCollection trainsInfo)
+        private TrainInfoCollection dataSource =
+            (Application.Current as App).TrainInfoCollection;
+
+        public MainWindow View { get; private set; }
+
+        public bool CanCloseApp
         {
-            if (window == null)
-                throw new ArgumentNullException("window");
+            get
+            {
+                MessageBoxResult result =
+                    MessageBox.Show(
+                    "Хотите выйти, даже если после этого вы потеряете несохранённые результаты?",
+                    "Выход из приложения", MessageBoxButton.YesNo);
+                return result == MessageBoxResult.Yes ? true : false;
+            }
+        }
 
-            if (trainsInfo == null)
-                throw new ArgumentNullException("trainsInfo");
+        public MainWindowController(MainWindow view)
+        {
+            if (view == null)
+                throw new ArgumentNullException("view");
 
-            trainsInfoWindow = window;
-            trainsInfoView = new PagedCollectionView(trainsInfo);
+            View = view;
+        }
+
+        public void LoadFile()
+        {
+            OpenFileDialog dialog = new OpenFileDialog()
+            {
+                Filter = fileFilter,
+                AddExtension = true,
+                CheckPathExists = true,
+                DefaultExt = "schd"
+            };
+            dialog.ShowDialog();
+            dataSource.Clear();
+            foreach (var item in TrainInfoCollection.Load(dialog.FileName))
+            {
+                dataSource.Add(item);
+            }
+            
         }
     }
 }

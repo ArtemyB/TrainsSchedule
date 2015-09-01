@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Bordushko.TrainsSchedule.Controllers;
 using Bordushko.TrainsSchedule.Views;
 using Microsoft.Win32;
 
@@ -21,13 +23,15 @@ namespace Bordushko.TrainsSchedule
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainWindowController Controller { get; private set; }
         public MainWindow()
         {
             InitializeComponent();
+            Controller = new MainWindowController(this);
             DataContext = (Application.Current as App).TrainInfoCollection;
         }
 
-        private void addRecordButton_Click(object sender, RoutedEventArgs e)
+        private void AddRecordButton_Click(object sender, RoutedEventArgs e)
         {
             AddRecordDialog dialog = new AddRecordDialog();
             dialog.ShowDialog();
@@ -47,9 +51,29 @@ namespace Bordushko.TrainsSchedule
 
         private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Filter = "Trains Schedule (.schd)|*.schd|XML file (.xml)|*.xml",
+                DefaultExt = "schd",
+                ValidateNames = true
+            };
             dialog.ShowDialog();
             (Application.Current as App).TrainInfoCollection.Save(dialog.FileName);
+        }
+
+        private void Close_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !Controller.CanCloseApp;
+        }
+
+        private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Controller.LoadFile();
         }
     }
 }

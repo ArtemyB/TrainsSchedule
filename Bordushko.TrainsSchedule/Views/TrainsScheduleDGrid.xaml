@@ -10,13 +10,21 @@
              d:DesignWidth="600"
              mc:Ignorable="d">
     <UserControl.CommandBindings>
-        <CommandBinding CanExecute="FirstPage_OnCanExecute"
+        <CommandBinding CanExecute="FirstPage_CanExecute"
                         Command="FirstPage"
                         Executed="FirstPage_Executed" />
-        <CommandBinding Command="LastPage" Executed="LastPage_Executed" />
-        <CommandBinding Command="NextPage" Executed="NextPage_Executed" />
-        <CommandBinding Command="PreviousPage" Executed="PreviousPage_Executed" />
-        <CommandBinding Command="GoToPage" Executed="GoToPage_Executed" />
+        <CommandBinding CanExecute="LastPage_CanExecute"
+                        Command="LastPage"
+                        Executed="LastPage_Executed" />
+        <CommandBinding CanExecute="NextPage_CanExecute"
+                        Command="NextPage"
+                        Executed="NextPage_Executed" />
+        <CommandBinding CanExecute="PreviousPage_CanExecute"
+                        Command="PreviousPage"
+                        Executed="PreviousPage_Executed" />
+        <CommandBinding CanExecute="GoToPage_CanExecute"
+                        Command="GoToPage"
+                        Executed="GoToPage_Executed" />
     </UserControl.CommandBindings>
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>

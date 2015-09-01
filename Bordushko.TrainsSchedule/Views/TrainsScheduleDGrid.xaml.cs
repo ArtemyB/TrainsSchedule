@@ -27,13 +27,14 @@ namespace Bordushko.TrainsSchedule.Views
 
         public TrainsScheduleDGrid()
         {
-            InitializeComponent();
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 Controller = new TrainsScheduleDGridController(
-                        this, DataSource);
+                            this, DataSource);
+
+                InitializeComponent();
+            
                 DataContext = Controller.CollectionView;
-                //(PagedCollectionView)CollectionViewSource.GetDefaultView(DataSource); 
             }
         }
 
@@ -47,36 +48,7 @@ namespace Bordushko.TrainsSchedule.Views
             }
         }
 
-        private void FirstPage_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Controller.CollectionView.MoveToFirstPage();
-        }
-
-        private void FirstPage_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = false;
-        }
-
-        private void LastPage_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Controller.CollectionView.MoveToLastPage();
-        }
-
-        private void NextPage_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Controller.CollectionView.MoveToNextPage();
-        }
-
-        private void PreviousPage_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Controller.CollectionView.MoveToPreviousPage();
-        }
-
-        private void GoToPage_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Controller.GoToPage((e.OriginalSource as TextBox).Text);
-        }
-
+        #region Methods
         public void Filter(Func<object, bool> filterFunc)
         {
             Controller.Filter(filterFunc);
@@ -86,11 +58,62 @@ namespace Bordushko.TrainsSchedule.Views
         {
             Controller.FilterReset();
         }
+        #endregion Methods
+
+        #region Commands' Handlers
+
+        private void FirstPage_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Controller.CollectionView.MoveToFirstPage();
+        }
+        private void FirstPage_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Controller.CanGoToFirstAndPrevPage;
+        }
+
+        private void LastPage_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Controller.CollectionView.MoveToLastPage();
+        }
+        private void LastPage_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Controller.CanGoToLastAndNextPage;
+        }
+
+        private void NextPage_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Controller.CollectionView.MoveToNextPage();
+        }
+        private void NextPage_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Controller.CanGoToLastAndNextPage;
+        }
+
+        private void PreviousPage_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Controller.CollectionView.MoveToPreviousPage();
+        }
+        private void PreviousPage_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Controller.CanGoToFirstAndPrevPage;
+        }
+
+        private void GoToPage_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Controller.GoToPage((e.OriginalSource as TextBox).Text);
+        }
 
         private void CurrentPageTextBoxInputValidation(object sender, TextCompositionEventArgs e)
         {
             Regex numsRegex = new Regex("[^0-9]+");
             e.Handled = numsRegex.IsMatch(e.Text);
         }
+
+        private void GoToPage_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Controller.CanGoToPage;
+        }
+ 
+        #endregion Commands' Handlers
     }
 }

@@ -4,11 +4,14 @@
         xmlns:views="clr-namespace:Bordushko.TrainsSchedule.Views"
         xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
         x:Name="mainWindow"
-        Title="Main Window"
+        Title="Расписание Поездов"
+        Closing="MainWindow_OnClosing"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen">
     <Window.CommandBindings>
+        <CommandBinding Command="Open" Executed="Open_Executed" />
         <CommandBinding Command="Save" Executed="Save_Executed" />
+        <CommandBinding Command="Close" Executed="Close_Executed" />
     </Window.CommandBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -53,7 +56,7 @@
                         Content="{Binding RelativeSource={RelativeSource Self},
                                           Path=Command.Text}" />
                 <Button Command="SaveAs" Content="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
-                <Button Name="AddRecordButton" Click="addRecordButton_Click">
+                <Button Name="AddRecordButton" Click="AddRecordButton_Click">
                     <TextBlock>Добавить информацию</TextBlock>
                 </Button>
                 <Button Click="RemoveButton_Click">
@@ -127,7 +130,7 @@
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>-->
-            <views:TrainsScheduleDGrid Grid.Column="1" />
+            <views:TrainsScheduleDGrid x:Name="ScheduleDGrid" Grid.Column="1" />
         </Grid>
     </DockPanel>
 </Window>
